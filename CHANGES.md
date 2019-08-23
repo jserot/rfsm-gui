@@ -1,5 +1,10 @@
 # Changes
 
+# 1.6 (Aug 24, 2019)
+* building the application from source no longer implies building the `rfsmc` compiler and the OCaml 
+  library (which are provided as a separate `opam` package (the distributed MacOS and Windows
+  installers include pre-built binaries of the compiler)
+
 # 1.5 (May 30, 2019)
 * New syntax for FSM models. Transitions are now written:
      `| src_state -> dst_state ON ev [WHEN guards] [WITH actions]`

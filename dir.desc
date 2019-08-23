@@ -6,18 +6,12 @@
 ./VERSION
     Self-descriptive
 ./META
-./opam
-    OPAM-related files
 ./Makefile
     Top-level makefile
 ./configure
     Top-level configuring script. To run before invoking make
-./src/lib
-    Source code for the library
-./src/compiler
-    Source code for [rfsmc] compiler
-./src/gui
-    Source code for rfsm GUI
+./src
+    Source code
 ./lib/etc
 ./lib/systemc
 ./lib/vhdl
@@ -26,8 +20,6 @@
     Examples
 ./doc/um
     User manual
-./doc/lib
-    Documentation of the library 
 ./dist
     Platform-specific files
 ./etc

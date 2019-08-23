@@ -8,12 +8,13 @@ dotprogram='dot'
 dotviewer='graphviz'
 vcdviewer='gtkwave'
 txtviewer='nano'
-install_prefix=''
+install_prefix='/usr/local/rfsm'
 install_bindir=''
 install_libdir=''
 install_docdir=''
 #install_mandir=''
-install_emacsdir=''
+rfsmc=`opam config var bin`/rfsmc
+rfsmlib=`opam config var share`/rfsm
 gui='yes'
 sysc_lib='yes'
 vhdl_lib='yes'
@@ -42,14 +43,12 @@ while : ; do
         install_docdir=$2; shift;;
 #    -mandir|--mandir)
 #        install_mandir=$2; shift;;
-    -emacsdir|--emacsdir)
-        install_emacsdir=$2; shift;;
-    -byte-only|--byte-only)
-        native='no';;
+    -rfsmc|--rfsmc)
+        rfsmc=$2; shift;;
+    -rfsmlib|--rfsmlib)
+        rfsmlib=$2; shift;;
     -no-libs|--no-libs)
         sysc_lib='no'; vhdl_lib='no';;
-    -no-gui|--no-gui)
-        gui='no';;
     -no-doc|--no-doc)
         doc='no';;
     -dot|--dot)
@@ -74,9 +73,8 @@ Options: [defaults in brackets after descriptions]
   --bindir DIR            install  executables in DIR [default: $install_bindir]
   --libdir DIR            install libraries in in DIR [default: $install_libdir]
   --docdir DIR            install documentation in DIR [default: $install_docdir]
-  --emacsdir DIR          install emacs mode in DIR [default:$install_emacsdir]
-  --byte-only             do not build native code executable
-  --no-gui                do not build the Qt-based GUI
+  --rfsmc PATH            path to rfsmc compiler [default: $rfsmc]
+  --rfsmlib DIR           path to rfsmc library [default: $rfsmlib]
   --no-libs               do not build the SystemC and GHDL support libraries
   --no-doc                do not build the documentation from sources
   --dot NAME              command for runing dot program [default: $dotprogram]
@@ -96,7 +94,6 @@ if [ -n "$install_prefix" ]; then
   install_bindir="$install_prefix/bin"
   install_libdir="$install_prefix/lib"
   install_docdir="$install_prefix/doc"
-  install_emacsdir="$install_prefix/share/emacs/site-lisp"
 fi
 
 
@@ -104,13 +101,11 @@ case "$platform" in
   win32)
       if [ -z "$install_bindir" ]; then install_bindir='./build/bin'; fi;
       if [ -z "$install_libdir" ]; then install_libdir='./build/lib'; fi;
-      if [ -z "$install_docdir" ]; then install_docdir='./build/doc'; fi;
-      if [ -z "$install_emacsdir" ]; then install_emacsdir='./build/share'; fi;;
+      if [ -z "$install_docdir" ]; then install_docdir='./build/doc'; fi;;
   *) 
-      if [ -z "$install_bindir" ]; then install_bindir=`opam config var bin`; fi;
-      if [ -z "$install_libdir" ]; then install_libdir=`opam config var lib`; fi;
-      if [ -z "$install_emacsdir" ]; then install_emacsdir=`opam config var share`/emacs/site-lisp; fi;
-      if [ -z "$install_docdir" ]; then install_docdir=`opam config var doc`; fi;;
+      if [ -z "$install_bindir" ]; then install_bindir=$install_prefix/bin; fi;
+      if [ -z "$install_libdir" ]; then install_libdir=$install_prefix/lib; fi;
+      if [ -z "$install_docdir" ]; then install_docdir=$install_prefix/doc; fi;;
 esac
 
 # Generate the config file
@@ -139,9 +134,10 @@ echo "" >> config
 echo "# INSTALL PATHS" >> config
 echo "INSTALL_BINDIR=$install_bindir" >> config
 echo "INSTALL_LIBDIR=$install_libdir" >> config
+if [ -n "$doc" ]; then
 echo "INSTALL_DOCDIR=$install_docdir" >> config
+fi
 #echo "INSTALL_MANDIR=$install_mandir" >> config
-echo "INSTALL_EMACSDIR=$install_emacsdir" >> config
 
 # Finish generated files
 
@@ -153,9 +149,10 @@ echo
 echo "Directory where the distribution will be installed:"
 echo "        binaries................   $install_bindir"
 echo "        library.................   $install_libdir"
+if [ -n "$doc" ]; then
 echo "        documentation............. $install_docdir"
+fi
 #echo "        man pages................. $install_mandir"
-echo "        emacs mode................ $install_emacsdir"
 echo
 
 echo "** Wrote file ./config"
@@ -171,15 +168,8 @@ echo "# To be adjusted if necessary" >> platform
 echo "" >> platform
 
 pwd=`pwd`
-if [ -n "$local" ]; then
-echo "RFSM=$pwd" >> platform
-echo "LIBDIR=$pwd/lib" >> platform
-echo "RFSMC=$pwd/src/compiler/rfsmc" >> platform
-else
-echo "RFSM=$install_prefix" >> platform
-echo "LIBDIR=$install_prefix/lib" >> platform
-echo "RFSMC=$install_prefix/bin/rfsmc" >> platform
-fi
+echo "RFSMC=$rfsmc" >> platform
+echo "LIBDIR=$rfsmlib" >> platform
 echo "" >> platform
 echo "DOT=dot" >> platform
 echo "DOTVIEWER=graphviz" >> platform
@@ -190,14 +180,6 @@ echo "CXX=g++" >> platform
 echo "LD=g++" >> platform
 echo "CXXFLAGS=-Wall -Wno-deprecated -I." >> platform
 echo "LDFLAGS=" >> platform
-echo "" >> platform
-echo "SYSTEMC=$sysc_dir" >> platform
-echo "TARGET_ARCH=$arch" >> platform
-echo "" >> platform
-echo "GHDL=ghdl" >> platform
-echo "GHDLOPTS=-fno-color-diagnostics" >> platform
 
-mv platform ./lib/etc
-
-echo "** Wrote file ./lib/etc/platform"
+echo "** Wrote file ./platform"
 echo "** Configuration completed successfully **"

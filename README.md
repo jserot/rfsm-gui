@@ -1,16 +1,8 @@
 RFSM 
 ====
 
-RFSM is a toolset for describing and simulating StateChart-like state diagrams.
-The toolset is composed of
-
-* an Ocaml library
-
-* a command-line compiler (`rfsmc`) 
-
-* a Qt-based standalone application (`Rfsm.app` or `rfsm.exe`)
-
-RFSM tools take
+RFSM is an application for describing and simulating StateChart-like state diagrams.
+It takes
 
 * a description of a system as a set of StateChart-like state diagrams
 
@@ -18,9 +10,9 @@ RFSM tools take
 
 and generate
 
-* a graphical representation of the system (to be viewed with [Graphviz][graphviz] for example)
+* a graphical representation of the system (to be viewed with [Graphviz](http://www.graphviz.org) for example)
 
-* execution traces as `.vcd` files (to be viewed with [Gtkwave][gtkwave] for example)
+* execution traces as `.vcd` files (to be viewed with [Gtkwave](http://gtkwave.sourceforge.net) for example)
 
 Additionnaly, dedicated backends can generate system descriptions in
 
@@ -30,35 +22,31 @@ Additionnaly, dedicated backends can generate system descriptions in
 
 * `VHDL` 
 
-for simulation of implementation. 
-
-[graphviz]: http://www.graphviz.org
-[gtkwave]: http://gtkwave.sourceforge.net
+RFSM is actually a graphical front-end to the [rfsmc](https://github.com/jserot/rfsm) compiler.
 
 DOCUMENTATION
 -------------
 
-The project web page (including links for downloading the tools) is 
-[here][web].
+The project web page is [here](http://dream.ispr-ip.fr/RFSM).
 
-The user manual can be found [here][usermanual]
+The user manual can be found [here](http://jserot.github.io/rfsm-gui-docs/rfsm-gui.pdf).
 
-[usermanual]: http://dream.ispr-ip.fr/RFSM/doc/rfsm.pdf
+Detailed information on the RFSM language can be found on the [rfsmc compiler github
+page](https://github.com/jserot/rfsm).
 
-[web]: http://dream.ispr-ip.fr/RFSM
-
-The library API is documented [here][libapi].
-
-[libapi]: http://dream.ispr-ip.fr/RFSM/doc/lib/index.html
 
 INSTALLATION
 ------------
 
-Prebuilt Windows and MacOS versions can be downloaded from the [project webpage][web].
+Prebuilt Windows and MacOS versions can be downloaded
+[here](https://github.com/jserot/rfsm-gui/releases) or the [project webpage](http://dream.ispr-ip.fr/RFSM).
 
-Source code is available via [github][] (`git clone https://github.com/jserot/rfsm`).
-
-The library and the compiler are available as an [opam][] package.
-
-[github]: https://github.com/jserot/rfsm
-[opam]: https://opam.ocaml.org/packages/rfsm
+Source code is available via by simply cloning this sub-tree: `git clone
+https://github.com/jserot/rfsm-gui`. Building the application from source requires:
+ * an ocaml compiler (>=4.06) with the following OPAM packages installed:
+  - ocamlgraph
+  - menhir
+  - lascar (>=0.6)
+  - rfsm (>=1.6)
+ * a working Qt (>=5.0) installation
+  

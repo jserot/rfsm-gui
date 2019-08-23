@@ -3,14 +3,11 @@ When building from sources
 Pre-requisites
 --------------
 
-* For compiling the [rfsmc] compiler
-
-- Ocaml compiler (>=4.06) with the following packages installed (preferably using OPAM 2) :
-  . ocamlfind
-  . ocamlbuild
+- Ocaml compiler (>=4.06) with the following OPAM packages installed:
   . ocamlgraph
   . menhir
-  . lascar
+  . lascar (>=0.6)
+  . rfsm (>=1.6)
   
 * For building the SystemC support library 
 

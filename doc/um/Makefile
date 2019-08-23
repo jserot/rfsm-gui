@@ -1,8 +1,18 @@
-DOC=rfsm
+OBELISK=obelisk
+
+DOC=rfsm-gui
+
+SRCS= bnf.tex \
+	gui.tex \
+	introduction.tex \
+	overview.tex \
+	syntax.tex \
+	rfsm-gui.tex
+GEN_SRCS = rfsmc-options.tex # grammar.tex
 
 all: $(DOC).pdf
 
-$(DOC).pdf: 
+$(DOC).pdf: $(SRCS) 
 	pdflatex $(DOC).tex > pdflatex.log
 	pdflatex $(DOC).tex > pdflatex.log
 
@@ -11,9 +21,15 @@ clean:
 
 .PHONY: grammar.tex
 
-grammar.tex:
-	@read -p "** About to backup ./grammar.tex and to overwrite it with ../../src/compiler/grammar.tex. Are you sure ? " r;\
-	if [ $$r = "yes" ]; then (cp ./grammar.tex grammar.sav.tex; cp ../../src/compiler/grammar.tex .; echo "** Done. Now diff-edit grammar.sav.tex and grammar.tex to integrate changes"); fi
+gen_tex_option = \
+	awk -F ";" '{ printf("%s & %s\\\\\n", $$3, $$6) }' < $(1) | sed 's/_/\\_/g' > $(2)
+
+rfsmc-options.tex: ../../src/compiler/options_spec.txt
+	$(call gen_tex_option,$<,$@)
+
+grammar.tex: ../../src/compiler/main_parser.mly
+	@read -p "** About to regenerate ./grammar.tex. Are you sure ? " r;\
+	if [ $$r = "yes" ]; then (cp ./grammar.tex grammar.sav.tex; $(OBELISK) latex -i -prefix rfsm -o grammar.tex -package grammar-defns $<; echo "** Done. Now diff-edit grammar.sav.tex and grammar.tex (resp. sav/grammar-defns.sty and grammar-defns.sty)  to integrate changes"); fi
 
 realclean: clobber
 
