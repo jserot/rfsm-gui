@@ -1,6 +1,5 @@
 #include "file_Filter.h"
 #include <QFileSystemModel>
-#include <qDebug>
 
 bool FileFilter::filterAcceptsRow(int row, const QModelIndex &par) const
 {

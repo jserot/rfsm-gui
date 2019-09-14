@@ -1,0 +1,69 @@
+# Makefile to build the MacOS distribution
+
+QMAKE=/Developer/Qt5.8/5.8/clang_64/bin/qmake
+
+DOTPROGRAM="dot"
+DOTVIEWER="open -a Graphviz"
+VCDVIEWER="open -a gtkwave"
+TXTVIEWER="open"
+
+OPAM_PREFIX=`opam var prefix`
+RFSMC=$(OPAM_PREFIX)/bin/rfsmc
+RFSMMAKE=$(OPAM_PREFIX)/bin/rfsmmake
+RFSMLIB=$(OPAM_PREFIX)/share/rfsm
+RFSMC_SRC_DIR=`pwd`/../rfsmc
+
+.PHONY: build install installer
+
+all: build
+
+INSTALL_DIR=/tmp/rfsm-gui
+
+build:
+	@echo "** Building"
+	(cd src; $(QMAKE) -spec macx-clang -o Makefile rfsm.pro CONFIG+=x86_64; make)
+	make doc
+
+install: CHANGES.txt README.txt
+	@echo "** Installing in $(INSTALL_DIR)"
+	rm -rf $(INSTALL_DIR)
+	mkdir $(INSTALL_DIR)
+	cp -r src/rfsm.app $(INSTALL_DIR)/Rfsm.app
+	cp $(RFSMC) $(INSTALL_DIR)/Rfsm.app/Contents/MacOS/rfsmc
+	cp $(RFSMMAKE) $(INSTALL_DIR)/Rfsm.app/Contents/MacOS/rfsmmake
+	cp ./dist/macos/rfsm.ini $(INSTALL_DIR)/Rfsm.app/Contents/MacOS
+	cp ./dist/macos/INSTALL $(INSTALL_DIR)/INSTALL
+	mkdir $(INSTALL_DIR)/doc
+	cp  doc/um/rfsm-gui.pdf $(INSTALL_DIR)/doc/rfsm-manual.pdf
+	mkdir $(INSTALL_DIR)/examples
+	mkdir $(INSTALL_DIR)/examples/{single,multi}
+	cp -r $(RFSMC_SRC_DIR)/examples/{single,multi} $(INSTALL_DIR)/examples
+	cp {CHANGES.txt,KNOWN-BUGS,LICENSE,README.txt} $(INSTALL_DIR)
+
+RFSM_VOLUME=Rfsm-$(VERSION)
+
+installer:
+	@echo "** Creating disk image"
+	rm -f /tmp/Rfsm.dmg
+	hdiutil create -size 64m -fs HFS+ -volname "$(RFSM_VOLUME)" /tmp/Rfsm.dmg
+	hdiutil attach /tmp/Rfsm.dmg
+	cp -r $(INSTALL_DIR)/Rfsm.app /Volumes/$(RFSM_VOLUME)
+	ln -s /Applications /Volumes/$(RFSM_VOLUME)/Applications
+	cp -r $(INSTALL_DIR)/examples /Volumes/$(RFSM_VOLUME)/Examples
+	cp -r $(INSTALL_DIR)/doc /Volumes/$(RFSM_VOLUME)/Documentation
+	cp $(INSTALL_DIR)/{CHANGES.txt,KNOWN-BUGS,LICENSE,README.txt,INSTALL} /Volumes/$(RFSM_VOLUME)
+	hdiutil detach /Volumes/$(RFSM_VOLUME)
+	hdiutil convert /tmp/Rfsm.dmg -format UDZO -o /tmp/Rfsm_ro.dmg
+	mv /tmp/Rfsm_ro.dmg /tmp/Rfsm.dmg
+	@echo "** Done. Disk image is /tmp/Rfsm.dmg"
+
+clean:
+	(cd src; make clean)
+	(cd doc/um; make clean)
+
+clobber: clean
+	(cd src; make clean)
+	(cd doc/um; make clobber)
+	\rm -f src/gui/rfsm.app/Contents/MacOS/rfsm
+	\rm -f *~
+

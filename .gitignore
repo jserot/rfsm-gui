@@ -1,10 +1,5 @@
 .DS_Store
 *~
-*.byte
-*.native
-*.cmi
-*.cmo
-_build/
 CHANGES.txt
 README.txt
 CHANGES.html
@@ -13,6 +8,7 @@ HOWTO
 TODO
 config
 config-stamp
+platform
 *.dvi
 *.pdf
 *.aux
@@ -21,15 +17,14 @@ config-stamp
 *.cf
 .qmake.stash
 Info.plist
-TAGS
 *.dot
 *.o
 *.vcd
-*.merlin
 src/moc_*.*
 src/qrc_resources.*
 src/ui_*.h
 src/rfsm.app/
 src/uis/
 src/Makefile
-doc/um/figs/*.pdf
+src/rfsm.app/
+src/Makefile

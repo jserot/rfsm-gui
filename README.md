@@ -42,11 +42,21 @@ Prebuilt Windows and MacOS versions can be downloaded
 [here](https://github.com/jserot/rfsm-gui/releases) or the [project webpage](http://dream.ispr-ip.fr/RFSM).
 
 Source code is available via by simply cloning this sub-tree: `git clone
-https://github.com/jserot/rfsm-gui`. Building the application from source requires:
- * an ocaml compiler (>=4.06) with the following OPAM packages installed:
+https://github.com/jserot/rfsm-gui`. 
+
+Pre-requisites for building from source:
+
+* an ocaml compiler (>=4.06) with the following OPAM packages installed:
   - ocamlgraph
   - menhir
   - lascar (>=0.6)
   - rfsm (>=1.6)
- * a working Qt (>=5.0) installation
+ * a working Qt (>=5.8) installation
   
+
+Building from source:
+
+* `cd` to the source tree
+* `./configure [options]` (`./configure --help` for the list of options)
+* `make`
+* `make install` 

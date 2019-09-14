@@ -2,7 +2,6 @@ BUILD
 - use cmake ?
 
 DOC
-- update README
 - fully automatize generation of doc/um/{grammar.tex,grammar-defns.sty}
 
 GUI
