@@ -38,7 +38,7 @@ page](https://github.com/jserot/rfsm).
 ### Using binary versions
 
 Prebuilt Windows and MacOS versions can be downloaded
-[here](https://github.com/jserot/rfsm-gui/releases) or the [project webpage](http://dream.ispr-ip.fr/RFSM).
+[here](https://github.com/jserot/rfsm-gui/releases) (check the `Assets` tab)  or from the [project webpage](http://dream.ispr-ip.fr/RFSM).
 
 ### Building from source 
 
@@ -62,5 +62,5 @@ Prebuilt Windows and MacOS versions can be downloaded
 If you can't or don't want to build the documentation from source, pass the `--no-doc` option to
 `configure`. A pre-built `pdf` version is available [here](http://jserot.github.io/rfsm-gui-docs/rfsm-gui.pdf).
 
-Building on Windows requires (Cygwin)[https://cygwin.com] or (MinGW)[http://www.mingw.org] which
+Building on Windows requires [Cygwin](https://cygwin.com) or [MinGW](http://www.mingw.org) which
 `gcc`, `ocaml` and `opam` installed.

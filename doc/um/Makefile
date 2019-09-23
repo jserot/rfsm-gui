@@ -11,6 +11,7 @@ SRCS= bnf.tex \
 GEN_SRCS = rfsmc-options.tex # grammar.tex
 
 all: $(DOC).pdf
+	cp rfsm-gui.pdf ~/Dev/github.io/rfsm-gui-docs
 
 $(DOC).pdf: $(SRCS) 
 	pdflatex $(DOC).tex > pdflatex.log
