@@ -44,7 +44,7 @@ install:
 
 installer:
 	@echo "** Building self-installer"
-	/C/Program\ Files/Inno\ Setup\ 5/iscc ./dist/windows/RfsmSetup.iss
+	/C/Program\ Files\ \(x86\)/Inno\ Setup\ 6/iscc ./dist/windows/RfsmSetup.iss
 
 clean:
 	(cd src; make clean)

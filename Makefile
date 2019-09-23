@@ -76,7 +76,7 @@ win-pre:
 	@echo "Building documentation"
 	(cd doc/um; make)
 	@echo "** Copying source tree"
-	if [ -d $(WIN_SRC_DIR) ]; then rm -rf $(WIN_SRC_DIR).bak; mv $(WIN_SRC_DIR) $(WIN_SRC_DIR).bak; fi
+	if [ -d $(WIN_SRC_DIR) ]; then rm -rf $(WIN_SRC_DIR); fi
 	cp -r $(CURRENT_SRC_DIR) $(WIN_SRC_DIR)
 	mkdir $(WIN_SRC_DIR)/examples
 	cp -r $(RFSMC_SRC_DIR)/examples/{single,multi} $(WIN_SRC_DIR)/examples

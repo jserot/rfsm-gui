@@ -6,7 +6,7 @@ AppContact=jocelyn.serot@uca.fr
 AppCopyright=Copyright (C) 2011-2017 J. Serot
 AppPublisher=J. Serot / Clermont-Auvergne University
 AppPublisherURL=http://cloud.ip.univ-bpclermont.fr/~serot/rfsm
-LicenseFile=E:/Caml/rfsm/LICENSE
+LicenseFile=F:/Qt/rfsm-gui/LICENSE
 UsePreviousAppDir=false
 DefaultDirName={pf}/Rfsm
 DefaultGroupName=Rfsm
@@ -15,17 +15,17 @@ Compression=none
 ;SolidCompression=yes
 OutputBaseFilename=Rfsm_setup
 OutputDir=.
-WizardImageFile=E:\Caml\rfsm\build\rfsm.bmp
-WizardSmallImageFile=E:\Caml\rfsm\build\rfsm_small.bmp
+WizardImageFile=F:\Qt\rfsm-gui\build\rfsm.bmp
+WizardSmallImageFile=F:\Qt\rfsm-gui\build\rfsm_small.bmp
 
 [Files]
-Source: "E:\Caml\rfsm\build\*"; DestDir: "{app}"; Excludes:"examples"; Flags: recursesubdirs
-Source: "E:\Caml\rfsm\build\examples\*"; DestDir: "{code:GetDirs|0}\RfsmExamples"; Flags: recursesubdirs
+Source: "F:\Qt\rfsm-gui\build\*"; DestDir: "{app}"; Excludes:"examples"; Flags: recursesubdirs
+Source: "F:\Qt\rfsm-gui\build\examples\*"; DestDir: "{code:GetDirs|0}\RfsmExamples"; Flags: recursesubdirs
  
 [Icons]
-Name: "{group}\Rfsm"; Filename: "{app}\rfsm.exe";IconFilename: "E:\Caml\rfsm\build\rfsm.ico"
-Name: "{group}\{cm:UninstallProgram,Rfsm}"; Filename: "{uninstallexe}";IconFilename: "E:\Caml\rfsm\build\rfsmun.ico"
-Name: "{commondesktop}\Rfsm"; Filename: "{app}\Rfsm.exe";    IconFilename: "E:\Caml\rfsm\build\rfsm.ico"
+Name: "{group}\Rfsm"; Filename: "{app}\rfsm.exe";IconFilename: "F:\Qt\rfsm-gui\build\rfsm.ico"
+Name: "{group}\{cm:UninstallProgram,Rfsm}"; Filename: "{uninstallexe}";IconFilename: "F:\Qt\rfsm-gui\build\rfsmun.ico"
+Name: "{commondesktop}\Rfsm"; Filename: "{app}\Rfsm.exe";    IconFilename: "F:\Qt\rfsm-gui\build\rfsm.ico"
 
 [Run]
 Filename: "{app}\FIRST.TXT"; Description: "View the Quick StartUp guide"; Flags: postinstall shellexec skipifsilent
@@ -33,7 +33,7 @@ Filename: "{app}\rfsm.exe"; Description: "Launch application"; Flags: postinstal
 
 [INI]
 Filename: "{app}\rfsm.ini"; Section: "Settings"; Flags: uninsdeletesection
-Filename: "{app}\rfsm.ini"; Section: "Settings"; Key: "COMPILER"; String: "{app}\bin\rfsmc"
+Filename: "{app}\rfsm.ini"; Section: "Settings"; Key: "COMPILER"; String: "{app}\rfsmc"
 Filename: "{app}\rfsm.ini"; Section: "Settings"; Key: "DOTPROGRAM"; String: "{code:GetFiles|0}"
 Filename: "{app}\rfsm.ini"; Section: "Settings"; Key: "DOTVIEWER"; String: "{code:GetFiles|1}"
 Filename: "{app}\rfsm.ini"; Section: "Settings"; Key: "VCDVIEWER"; String: "{code:GetFiles|2}"
