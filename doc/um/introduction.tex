@@ -1,45 +1,36 @@
 \chapter{Introduction}
 \label{chap:intro}
 
-This document is a brief user manual for the RFSM toolset. It is, in its current form, very
-preliminary, but should suffice for a quick grasp of the provided tools. 
-
-\medskip
-RFSM is a set of tools aimed at describing, drawing and simulating \emph{reactive finite state
+This document is a brief user manual for the RFSM GUI application (in short ``RFSM application'').
+The RFSM application aims at describing, drawing and simulating \emph{reactive finite state
   machines}. Reactive FSMs are a FSMs for which transitions can only take place at the occurence of
 events.
 
 \medskip
-RFSM has been developed mainly for pedagogical purposes, in order to initiate students to
+The RFSM application has been developed mainly for pedagogical purposes, in order to initiate students to
 model-based design. It is currently used in courses dedicated to embedded system design both on
-software and hardware platforms (microcontrolers and FPGA resp.). But RFSM can also be used to
-generate code (C, SystemC or VHDL) from high-level models to be integrated to existing applications.
+software and hardware platforms (microcontrolers and FPGA resp.). It can be used to
 
-\medskip
-RFSM is actually composed of three distinct tools :
-\begin{itemize}
-\item a command-line compiler (\texttt{rfsmc}),
-\item a library for the OCaml programming language.
-\item a graphical user-interface (GUI) to the compiler, 
-\end{itemize}
-
-These tools can be used to
 \begin{itemize}
 \item describe FSM-based models and testbenches,
 \item generate graphical representations of these models (\verb|.dot| format) for visualisation,
 \item simulate these models, producing \verb|.vcd| files to be displayed with waveform viewers such
   as \texttt{gtkwave},
-\item generate C, SystemC and VHDL implementations (including testbenches for simulation)
+\item generate C, SystemC and VHDL implementations to be integrated to existing applications
+  (including testbenches for simulation)
 \end{itemize}
 
+\medskip The RFSM application is actually a graphical front-end to the \verb|rfsmc| command-line
+compiler\footnote{\texttt{https://github.com/jserot/rfsm}}.  The command-line compiler is described
+in a separate document. This document focuses in the GUI. It is organized as follows.
+Chapter~\ref{cha:overview} is an informal presentation of the RFSM language and of its possible
+usages. Chapter~\ref{cha:gui} describes the GUI-based application. Appendix A gives the detailed
+syntax of the language.  Chapter~\ref{cha:overview} and and appendix A are simply copied from the
+reference of the command-line compiler. They are only reproduced here for convenience.
+
 \medskip
-The command-line compiler and the OCaml library are described in a separate document. This document
-focuses in the GUI. It is organized as follows.
-Chapter~\ref{cha:overview} is an informal presentation of the RFSM language and of its
-possible usages. Chapter~\ref{cha:gui} describes the GUI-based application. Appendix A 
-gives the detailed syntax of the language.
-Chapter~\ref{cha:overview} and and appendix A are simply copied from the reference manual available
-with distribution of the command-line compiler. They are only reproduced here for convenience.
+The RFSM-Light application\footnote{\texttt{https://github.com/jserot/rfsm-light}} is simplified
+version of RFSM supporting of purely graphical description of single-FSM systems.
 
 %%% Local Variables: 
 %%% mode: latex
