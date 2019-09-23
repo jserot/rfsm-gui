@@ -1,5 +1,4 @@
-RFSM 
-====
+# RFSM 
 
 RFSM is an application for describing and simulating StateChart-like state diagrams.
 It takes
@@ -24,8 +23,7 @@ Additionnaly, dedicated backends can generate system descriptions in
 
 RFSM is actually a graphical front-end to the [rfsmc](https://github.com/jserot/rfsm) compiler.
 
-DOCUMENTATION
--------------
+## Documentation
 
 The project web page is [here](http://dream.ispr-ip.fr/RFSM).
 
@@ -35,28 +33,34 @@ Detailed information on the RFSM language can be found on the [rfsmc compiler gi
 page](https://github.com/jserot/rfsm).
 
 
-INSTALLATION
-------------
+## Installation
+
+### Using binary versions
 
 Prebuilt Windows and MacOS versions can be downloaded
 [here](https://github.com/jserot/rfsm-gui/releases) or the [project webpage](http://dream.ispr-ip.fr/RFSM).
 
-Source code is available via by simply cloning this sub-tree: `git clone
-https://github.com/jserot/rfsm-gui`. 
+### Building from source 
 
-Pre-requisites for building from source:
+#### Pre-requisites
 
-* an ocaml compiler (>=4.06) with the following OPAM packages installed:
-  - ocamlgraph
-  - menhir
-  - lascar (>=0.6)
-  - rfsm (>=1.6)
- * a working Qt (>=5.8) installation
-  
+* [ocaml](http://ocaml.org) (version>=4.08) with latest version of the following [opam](http://opam.ocaml.org) packages installed:
+  - [lascar](http://opam.ocaml.org/packages/lascar)
+  - [rfsm](http://opam.ocaml.org/packages/rfsm)
+* [Qt](http://www.qt.io) (version>=5.8)
+* For building the documentation from source: a working `LaTeX` installation (with the `pdftex`
+  command)
 
-Building from source:
+#### How to build
 
-* `cd` to the source tree
+* Get the source code: `git clone https://github.com/jserot/rfsm-gui`
+* `cd rfsm-gui`
 * `./configure [options]` (`./configure --help` for the list of options)
 * `make`
 * `make install` 
+
+If you can't or don't want to build the documentation from source, pass the `--no-doc` option to
+`configure`. A pre-built `pdf` version is available [here](http://jserot.github.io/rfsm-gui-docs/rfsm-gui.pdf).
+
+Building on Windows requires (Cygwin)[https://cygwin.com] or (MinGW)[http://www.mingw.org] which
+`gcc`, `ocaml` and `opam` installed.

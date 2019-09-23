@@ -9,27 +9,25 @@ all: build
 
 build:
 #	cat src/gui/builtin_options.txt src/compiler/options_spec.txt > src/gui/options_spec.txt
-ifeq ($(PLATFORM), win32)
-	make -f Makefile.win32 build
+ifeq ($(PLATFORM), windows)
+	make -f Makefile.windows build
 endif
 ifeq ($(PLATFORM), macos)
 	make -f Makefile.macos
 endif
-ifeq ($(PLATFORM), unix)
+ifeq ($(PLATFORM), linux)
 	(cd src; $(QMAKE) rfsm.pro; make)
 endif
 
 doc: 
 ifeq ($(BUILD_DOC),yes)
 	(cd doc/um; make)
-	pandoc -o CHANGES.html CHANGES.md
-	pandoc -o README.html README.md
 endif
 
-CHANGES.txt: CHANGES.md
-	pandoc -o CHANGES.txt CHANGES.md
-README.txt: README.md
-	pandoc -o README.txt README.md
+html:
+	pandoc -o CHANGES.html CHANGES.md
+	pandoc -o README.html README.md
+
 CHANGES.html: CHANGES.md
 	pandoc -o CHANGES.html CHANGES.md
 README.html: README.md
@@ -65,13 +63,13 @@ macos-dist:
 	make -f Makefile.macos install
 	make -f Makefile.macos installer
 
-###### Building the Win32 distribution
+###### Building the Windows distribution
 
 WIN_SRC_DIR=~/Desktop/SF1/Qt/rfsm-gui
 CURRENT_SRC_DIR=`pwd`
 RFSMC_SRC_DIR=`pwd`/../rfsmc
 
-win32-pre:
+win-pre:
 	@echo "** Preparing Windows version.."
 	@echo "** Cleaning source directory.."
 	make clobber
@@ -83,39 +81,19 @@ win32-pre:
 	mkdir $(WIN_SRC_DIR)/examples
 	cp -r $(RFSMC_SRC_DIR)/examples/{single,multi} $(WIN_SRC_DIR)/examples
 	@echo "** Done"
-	@echo "** Now, make win32-{build,install,installer} from Windows"
+	@echo "** Now, make win-{build,install,installer} from Windows"
 
-win32-build:
+win-build:
 	@echo "******************************************************************************"
 	@echo "**** WARNING: this make step must be invoked from a [mingw32(MSYS)] shell ****"
 	@echo "******************************************************************************"
-	make -f Makefile.win32
+	make -f Makefile.windows
 
-win32-install:
-	make -f Makefile.win32 install
+win-install:
+	make -f Makefile.windows install
 
-win32-installer:
-	make -f Makefile.win32 installer
-
-###### Building the Linux distribution
-
-LINUX_SRC_DIR=~/Desktop/SF2/Qt/rfsm-gui
-CURRENT_SRC_DIR=`pwd`
-RFSMC_SRC_DIR=`pwd`/../rfsmc
-
-linux-pre:
-	@echo "** Preparing Linux version.."
-	@echo "** Cleaning source directory.."
-	make clobber
-	@echo "Building documentation"
-	(cd doc/um; make)
-	@echo "** Copying source tree"
-	if [ -d $(LINUX_SRC_DIR) ]; then rm -rf $(LINUX_SRC_DIR).bak; mv $(LINUX_SRC_DIR) $(LINUX_SRC_DIR).bak; fi
-	cp -r $(CURRENT_SRC_DIR) $(LINUX_SRC_DIR)
-	mkdir $(LINUX_SRC_DIR)/examples
-	cp -r $(RFSMC_SRC_DIR)/examples/{single,multi} $(LINUX_SRC_DIR)/examples
-	@echo "** Done"
-	@echo "** Now, make linux-build from Linux"
+win-installer:
+	make -f Makefile.windows installer
 
 clean:
 	(cd src; make clean)
@@ -126,6 +104,7 @@ clobber: clean
 	(cd src; make clean)
 	(cd doc/um; make clobber)
 	rm -f doc/lib/*
-	\rm -f src/gui/rfsm.app/Contents/MacOS/rfsm
+	\rm -f src/rfsm.app/Contents/MacOS/rfsm
 	\rm -f *~
+	\rm -f README.html CHANGES.html
 

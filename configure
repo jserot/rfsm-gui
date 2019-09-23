@@ -40,7 +40,7 @@ while : ; do
     -rfsmlib|--rfsmlib)
         rfsmlib=$2; shift;;
     -no-doc|--no-doc)
-        doc='no';;
+        doc='';;
     -dot|--dot)
         dotprogram=$2; shift;;
     -dotviewer|--dotviewer)
@@ -53,7 +53,7 @@ while : ; do
         cat <<EOF
 Usage: configure [options]
 Options: [defaults in brackets after descriptions]
-  --platform NAME         target platform (unix, macos or win32) [default: unix]
+  --platform NAME         target platform (linux, macos or windows) [default: linux]
   --prefix DIR            install executables, libs and docs in DIR [default: $prefix]
   --bindir DIR            install  executables in DIR [default: $install_bindir]
   --libdir DIR            install libraries in in DIR [default: $install_libdir]

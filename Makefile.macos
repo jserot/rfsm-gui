@@ -1,5 +1,7 @@
 # Makefile to build the MacOS distribution
 
+include VERSION
+
 QMAKE=/Developer/Qt5.8/5.8/clang_64/bin/qmake
 
 DOTPROGRAM="dot"
@@ -22,7 +24,12 @@ INSTALL_DIR=/tmp/rfsm-gui
 build:
 	@echo "** Building"
 	(cd src; $(QMAKE) -spec macx-clang -o Makefile rfsm.pro CONFIG+=x86_64; make)
-	make doc
+	(cd doc/um; make)
+
+CHANGES.txt: CHANGES.md
+	pandoc -o CHANGES.txt CHANGES.md
+README.txt: README.md
+	pandoc -o README.txt README.md
 
 install: CHANGES.txt README.txt
 	@echo "** Installing in $(INSTALL_DIR)"

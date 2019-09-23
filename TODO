@@ -1,9 +1,0 @@
-BUILD
-- use cmake ?
-
-DOC
-- fully automatize generation of doc/um/{grammar.tex,grammar-defns.sty}
-
-GUI
-- use a form to edit project
-- add About Qt window (see qvge)

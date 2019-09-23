@@ -22,9 +22,7 @@ Info.plist
 *.vcd
 src/moc_*.*
 src/qrc_resources.*
-src/ui_*.h
 src/rfsm.app/
-src/uis/
 src/Makefile
 src/rfsm.app/
 src/Makefile

@@ -1,9 +1,10 @@
 # Changes
 
-# 1.6 (Aug 24, 2019)
-* building the application from source no longer implies building the `rfsmc` compiler and the OCaml 
-  library (which are provided as a separate `opam` package (the distributed MacOS and Windows
+# 1.6.0 (Sep 23, 2019)
+* The application is now only a GUI to the `rfsmc` compiler (which is distributed as a separate
+  `opam` package). For convenience, the, distributed MacOS and Windows
   installers include pre-built binaries of the compiler)
+* Building from sources under Linux is now supported (tested under LinuxMint19)
 
 # 1.5 (May 30, 2019)
 * New syntax for FSM models. Transitions are now written:
